@@ -1,0 +1,10 @@
+#!/bin/sh
+'''exec' /home/youenn/formationIA/a_1_19-02-24_concevoir_le_cadre_technique_d_une_app_IA/venv_concevoir_le_cadre_technique_d_une_app_IA/bin/python3 "$0" "$@"
+' '''
+# -*- coding: utf-8 -*-
+import re
+import sys
+from gunicorn.app.wsgiapp import run
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(run())
