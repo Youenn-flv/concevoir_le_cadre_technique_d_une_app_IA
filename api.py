@@ -41,7 +41,6 @@ def hello(name: str='World'):
         return {"message": f"Hello {name}"}
 
 
-
 # Création du modèle de données pour le modéle 1 ('Gender', 'Age', 'Physical Activity Level', 'Heart Rate', 'Daily Steps', 'BloodPressure_high', 'BloodPressure_low', 'Sleep Disorder'])
 class Credit(BaseModel):
         Gender : int

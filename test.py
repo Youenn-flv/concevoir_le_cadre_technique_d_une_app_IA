@@ -31,9 +31,6 @@ import os
 # Tests unitaires de l'environnement de développement
 class TestDev(TestCase):
 
-    def test_pour_test_oui_c_est_complique(self):
-        self.assertEqual(2 + 1 - 1, 2)
-
     # Vérifie que les fichiers sont présents
     def test_files(self):
         files_expected = ['File', 'Sleep_health_and_lifestyle_dataset.csv', 'api.py', 'model_1.pkl', 'model_2.pkl']
@@ -43,7 +40,7 @@ class TestDev(TestCase):
 
     # Vérifie que les requirements sont présents
     def test_requirements(self):
-        requirements_expected = ['fastapi', 'uvicorn', 'numpy', 'pydantic', 'mlflow', 'boto3']
+        requirements_expected = ['fastapi==0.109.2', 'uvicorn==0.27.1', 'numpy==1.26.4', 'pydantic==2.6.1', 'mlflow==2.10.2', 'boto3==1.34.44']
         with open('requirements.txt', 'r') as f:
             requirements_actual = f.read().splitlines()
         for requirement in requirements_expected:
@@ -54,7 +51,7 @@ class TestDev(TestCase):
         gitignore_present = False
         with open('.gitignore', 'r') as f:
             for line in f:
-                if line.strip() == 'venv':
+                if line.strip() == 'venv_concevoir_le_cadre_technique_d_une_app_IA':
                     gitignore_present = True
                     break
         self.assertTrue(gitignore_present, ".gitignore ne contient pas l'entrée 'venv'.")
