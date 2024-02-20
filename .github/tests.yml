@@ -1,0 +1,7 @@
+tests:
+  - name: TestGitInitialization
+    description: |
+      Test initialization of Git repository.
+    command: pytest tests/test.py
+
+

@@ -11,21 +11,20 @@ import os
 import boto3 as bo
 
 
-
 # Création des tags
 tags = [
-       {
-              "name": "Hello name V1",
-              "description": "te répond Hello World pour vérifier la conexion à l'api",
-       },
-       {
-              "name": "Predict V1",
-              "description": "Prediction du modelle 1",
-       },
-       {
-              "name": "Predict V2",
-              "description": "Prediction du modelle 2",
-       },
+    {
+        "name": "Hello Endpoint",
+        "description": "Renvoie un message de salutation avec le nom spécifié. Utile pour vérifier la connexion à l'API.",
+    },
+    {
+        "name": "Prediction Endpoint (Model 1)",
+        "description": "Effectue une prédiction en utilisant le premier modèle. Accepte les données sur le crédit comme entrée.",
+    },
+    {
+        "name": "Prediction Endpoint (Model 2)",
+        "description": "Effectue une prédiction en utilisant le deuxième modèle. Accepte des données sur la santé comme entrée.",
+    },
 ]
 
 # Création de l'application
@@ -37,7 +36,7 @@ app = FastAPI(
 )
 
 # Point de terminaison avec paramètre
-@app.get("/hello", tags=["Hello name V1"])
+@app.get("/hello", tags=["Hello Endpoint"])
 def hello(name: str='World'):
         return {"message": f"Hello {name}"}
 
@@ -54,12 +53,12 @@ class Credit(BaseModel):
         BloodPressure_low : int        ## !!! atention c'est probablement pas le bon typage
 
 # Charger le modèle 1
-with open('a_1_19-02-24_concevoir_le_cadre_technique_d_une_app_IA/model_1.pkl', 'rb') as file:
+with open('model_1.pkl', 'rb') as file:
     model_1 = pickle.load(file)
 
 
 # Point de terminaison : Prédiction 1
-@app.post("/predict", tags=["Predict V1"])
+@app.post("/predict", tags=["Prediction Endpoint (Model 1)"])
 def predict(credit: Credit) :
     # Transformation des données dans le bon format pour la prédiction
     data = [[credit.Gender,
@@ -69,7 +68,7 @@ def predict(credit: Credit) :
              credit.Daily_Steps,
              credit.BloodPressure_high,
              credit.BloodPressure_low]]
-    
+    ## code incomplet
     # Prédiction avec le modèle
     prediction = model_1.predict(data)
     
@@ -83,13 +82,14 @@ class HealthData(BaseModel):
     Sleep_Disorder: int
 
 # Charger le modèle 2
-with open('a_1_19-02-24_concevoir_le_cadre_technique_d_une_app_IA/model_2.pkl', 'rb') as file:
+with open('model_2.pkl', 'rb') as file:
     model_2 = pickle.load(file)
 
 
 # Point de terminaison : Prédiction 2
-@app.post("/predict2", tags=["Predict V2"])
+@app.post("/predict2", tags=["Prediction Endpoint (Model 2)"])
 def predict2(data: HealthData):
+    ## code à refaire ici
     prediction = model_2.predict(data)
     return {"prediction": prediction}
 

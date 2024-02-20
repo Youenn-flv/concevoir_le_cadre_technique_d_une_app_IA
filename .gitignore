@@ -1,0 +1,14 @@
+# Fichiers générés automatiquement
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+
+# Répertoire de dépendances Python
+venv/
+
+# Fichiers et répertoires spécifiques à votre éditeur/IDE
+.idea/
+.vscode/
